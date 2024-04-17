@@ -1,0 +1,45 @@
+<!-- accounts/templates/profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+  </head>
+  <body>
+    <h1>Welcome to your profile, {{ user.username }}!</h1>
+
+    <h2>User Information</h2>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Joined:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+
+    <h2>Your Products</h2>
+    {% if user_products %}
+    <ul>
+      {% for product in user_products %}
+      <li>{{ product.name }} - {{ product.price }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>You haven't listed any products yet.</p>
+    {% endif %}
+
+    <h2>Your Liked Products</h2>
+    {% if liked_products %}
+    <ul>
+      {% for product in liked_products %}
+      <li>{{ product.name }} - {{ product.price }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>You haven't liked any products yet.</p>
+    {% endif %}
+
+    <h2>Followers</h2>
+    <p><strong>Followers:</strong> {{ num_followers }}</p>
+    <p><strong>Following:</strong> {{ num_following }}</p>
+
+    <h2>Actions</h2>
+    <a href="{% url 'logout' %}">Logout</a>
+  </body>
+</html>
